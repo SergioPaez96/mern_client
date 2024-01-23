@@ -3,7 +3,7 @@ import { Image, Button, Icon, Confirm } from "semantic-ui-react";
 import { image } from "../../../../assets";
 import { useAuth } from "../../../../hooks";
 import { ENV } from "../../../../utils";
-import { BasicModal } from "../../Shared";
+import { BasicModal } from "../../../Shared";
 import { UserForm } from "../UserForm";
 import { User } from "../../../../api";
 
@@ -82,7 +82,7 @@ export function UserItem(props) {
           />
           <div>
             <p>
-              {user.firstname} {user.lastname}
+              {user.name} {user.lastname}
             </p>
             <p>{user.email}</p>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Icon, Confirm } from "semantic-ui-react";
-import { BasicModal } from "../../Shared";
+import { BasicModal } from "../../../Shared";
 import { Menu } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { NewMenu } from "../NewMenu";
@@ -31,7 +31,7 @@ export function MenuItem(props) {
     setIsDelete(false);
     setConfirmMessage(
       menu.active
-        ? `Desactvar el menu ${menu.title}`
+        ? `Desactivar el menu ${menu.title}`
         : `Activar el menu ${menu.title}`
     );
     onOpenCloseConfirm();

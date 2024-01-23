@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tab, Button } from "semantic-ui-react";
-import { BasicModal } from "../../../components/Admin/Shared";
+import { BasicModal } from "../../../components/Shared";
 import { ListMenu, NewMenu } from "../../../components/Admin/Menu";
 
 import "./Menu.scss";

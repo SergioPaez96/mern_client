@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Loader, Pagination } from "semantic-ui-react";
-import { size, map } from "lodash";
-import { CourseItem } from "../CourseItem";
+import { map, size } from "lodash";
+import { Post } from "../../../../api";
+import { PostItem } from "../PostItem";
 
-import { Course } from "../../../../api";
-import "./ListCourses.scss";
+import "./ListPost.scss";
 
-const courseController = new Course();
+const postController = new Post();
 
-export function ListCourses(props) {
+export function ListPost(props) {
   const { reload, onReload } = props;
-  const [courses, setCourses] = useState(false);
+  const [posts, setPosts] = useState(null);
+  const [pagination, setPagination] = useState(null);
   const [page, setPage] = useState(1);
-  const [pagination, setPagination] = useState();
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await courseController.getCourses({ page });
-        setCourses(response.docs);
+        const response = await postController.getPosts(page);
+        setPosts(response.docs);
         setPagination({
           limit: response.limit,
           page: response.page,
@@ -35,16 +35,15 @@ export function ListCourses(props) {
     setPage(data.activePage);
   };
 
-  if (!courses) return <Loader active inline='centered' />;
-  if (size(courses) === 0) return "No hay ningún curso";
+  if (!posts) return <Loader active inline="centered" />;
+  if (size(posts) === 0) return "No hay ningún post.";
 
   return (
-    <div className='list-courses'>
-      {map(courses, (course) => (
-        <CourseItem key={course._id} course={course} onReload={onReload} />
+    <div className="list-post">
+      {map(posts, (post) => (
+        <PostItem key={post._id} post={post} onReload={onReload} />
       ))}
-
-      <div className='list-courses__pagination'>
+      <div className="list-post__pagination">
         <Pagination
           totalPages={pagination.pages}
           defaultActivePage={pagination.page}

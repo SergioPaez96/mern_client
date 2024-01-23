@@ -1,9 +1,9 @@
 import { ENV } from "../utils";
 
-export class Course {
+export class Post {
   baseApi = ENV.BASE_API;
 
-  async createCourse(accessToken, data) {
+  async createPost(accessToken, data) {
     try {
       const formData = new FormData();
       Object.keys(data).forEach((key) => {
@@ -14,7 +14,7 @@ export class Course {
         formData.append("miniature", data.file);
       }
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.COURSE}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.POST}`;
       const params = {
         method: "POST",
         headers: {
@@ -34,24 +34,24 @@ export class Course {
     }
   }
 
-  async getCourses(params) {
+  async getPosts(page = 1, limit = 10) {
     try {
-      const pageFilter = `page=${params?.page || 1}`;
-      const limitFilter = `limit=${params?.limit || 10}`;
-      const url = `${this.baseApi}/${ENV.API_ROUTES.COURSE}?${pageFilter}&${limitFilter}`;
+      const pageFilter = `page=${page}`;
+      const limitFilter = `limit=${limit}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.POST}?${pageFilter}&${limitFilter}`;
 
       const response = await fetch(url);
-      const result = response.json();
+      const result = await response.json();
 
       if (response.status !== 200) throw result;
 
       return result;
     } catch (error) {
-      throw error;
+      console.error(error);
     }
   }
 
-  async updateCourse(accessToken, idCourse, data) {
+  async updatePost(accessToken, idPost, data) {
     try {
       const formData = new FormData();
       Object.keys(data).forEach((key) => {
@@ -62,7 +62,7 @@ export class Course {
         formData.append("miniature", data.file);
       }
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.COURSE}/${idCourse}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.POST}/${idPost}`;
       const params = {
         method: "PATCH",
         headers: {
@@ -72,7 +72,7 @@ export class Course {
       };
 
       const response = await fetch(url, params);
-      const result = response.json();
+      const result = await response.json();
 
       if (response.status !== 200) throw result;
 
@@ -82,9 +82,9 @@ export class Course {
     }
   }
 
-  async deleteCourse(accessToken, idCourse) {
+  async deletePost(accessToken, idPost) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.COURSE}/${idCourse}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.POST}/${idPost}`;
       const params = {
         method: "DELETE",
         headers: {

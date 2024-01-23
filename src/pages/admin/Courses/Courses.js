@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import { Tab, Button } from "semantic-ui-react";
-import { BasicModal } from "../../../components/Admin/Shared";
+import { BasicModal } from "../../../components/Shared";
 import { ListCourses, CourseForm } from "../../../components/Admin/Course";
 
 import "./Courses.scss";
 
 export function Courses() {
   const [showModal, setShowModal] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
+  const onReload = () => setReload((prevState) => !prevState);
 
   const panes = [
     {
       render: () => (
         <Tab.Pane attached={false}>
-          <ListCourses />
+          <ListCourses reload={reload} onReload={onReload} />
         </Tab.Pane>
       ),
     },

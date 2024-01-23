@@ -5,7 +5,7 @@ export class Menu {
 
   async getMenu(active = undefined) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.MENUS}?active=${active}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.MENU}?active=${active}`;
 
       const response = await fetch(url);
       const result = await response.json();

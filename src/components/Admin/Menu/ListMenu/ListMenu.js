@@ -22,7 +22,7 @@ export function ListMenu(props) {
     })();
   }, [active, reload]);
 
-  if (!menus) return <Loader active inline="centered" />;
+  if (!menus) return <Loader active inline='centered' />;
   if (size(menus) === 0) return "No hay ningún menu";
 
   return map(menus, (menu) => (
